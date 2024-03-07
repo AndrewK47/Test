@@ -6,15 +6,18 @@ const { DOMParser } = require('xmldom');
 const { getInvoiceInformation } = require('../Test/utils/function');
 const port = process.env.PORT || 3000;
 
+// app.use(express.json());
+app.use(express.static('public'));
 app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello, Express!');
 });
 
+
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/render', upload.single('invoice'), (req, res) => {
+app.post('/extract', upload.single('invoice'), (req, res) => {
     // Access the uploaded file
     const file = req.file;
 
